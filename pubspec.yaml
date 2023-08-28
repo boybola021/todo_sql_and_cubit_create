@@ -1,0 +1,35 @@
+name: todo_sql_and_cubit_create
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  bloc: ^8.1.2
+  sqflite: ^2.3.0
+  meta: ^1.9.1
+  easy_localization: ^3.0.2
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+  assets:
+    - assets/translate/en-US.json
+    - assets/translate/uz-UZ.json
+    - assets/translate/ru-RU.json
+
+ 
