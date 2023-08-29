@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                   return Card(
                     child: ListTile(
                       onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage(title: item.title,desc: item.description,)));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage(todo: item,)));
                         },
                       leading: IconButton(
                         onPressed: () => homeCubit.complete(item),

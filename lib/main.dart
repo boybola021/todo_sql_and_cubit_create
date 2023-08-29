@@ -8,6 +8,8 @@ import 'package:todo_sql_and_cubit_create/services/sql_service.dart';
 import 'app/app.dart';
 import 'cubit/home_cubit/home_cubit.dart';
 import 'package:path/path.dart';
+
+
 /// service locator
 final sql = SQLService();
 final homeCubit = HomeCubit();
