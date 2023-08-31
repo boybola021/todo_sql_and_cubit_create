@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ThemeCubit extends Cubit<ThemeMode>{
   ThemeCubit():super(ThemeMode.light);
 
-  void changeMode(){
+  void changeMode()async{
     if(state == ThemeMode.light) {
       return emit(ThemeMode.dark);
     } else {

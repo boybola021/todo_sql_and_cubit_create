@@ -1,6 +1,8 @@
 
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import '../cubit/theme_mod_cubit/theme_mode.dart';
 import '../models/todo_model.dart';
 
 const String tableTodo = 'TODO';
@@ -12,7 +14,7 @@ class SQLService {
     db = await openDatabase(path, version: 1);
     if(!db.isOpen) {
       await db.execute('''
-create table TODO ( 
+create table if not exists TODO ( 
   id integer primary key autoincrement, 
   title text not null,
   description text not null,
@@ -48,5 +50,4 @@ create table TODO (
     List<Map> maps = await db.query(tableTodo);
     return maps.map((json) => Todo.fromJson(Map<String, Object>.from(json))).toList();
   }
-
 }

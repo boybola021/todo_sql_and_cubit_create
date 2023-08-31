@@ -1,6 +1,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:todo_sql_and_cubit_create/cubit/detail_cubit/detail_cubit.dart';
 import '../../main.dart';
 import '../../models/todo_model.dart';
 part 'home_state.dart';
@@ -18,11 +19,4 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void complete(Todo todo){
-    final list = state.todos;
-    final index = list.indexOf(todo);
-    todo.isCompleted = !todo.isCompleted;
-    list.replaceRange(index, index + 1, [todo]);
-    emit(HomeFetchSuccess(todos: [...list]));
-  }
 }

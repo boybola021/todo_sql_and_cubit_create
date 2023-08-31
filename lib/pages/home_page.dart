@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_sql_and_cubit_create/main.dart';
@@ -25,6 +24,10 @@ class _HomePageState extends State<HomePage> {
       if(state is DetailDeleteSuccess || detailCubit.state is DetailCreateSuccess){
         homeCubit.fetchTodos();
       }
+      if(state is DetailUpdateSuccess){
+        homeCubit.fetchTodos();
+      }
+
     });
   }
 
@@ -71,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage(todo: item,)));
                         },
                       leading: IconButton(
-                        onPressed: () => homeCubit.complete(item),
+                        onPressed: () => detailCubit.complete(item),
                         icon: Icon(item.isCompleted? Icons.check_box : Icons.check_box_outline_blank),
                       ),
                       title: Text(item.title),

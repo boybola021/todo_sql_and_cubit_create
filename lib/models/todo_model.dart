@@ -4,7 +4,6 @@ class Todo {
   String title;
   String description;
   bool isCompleted;
-
   Todo(
       {required this.id,
         required this.title,

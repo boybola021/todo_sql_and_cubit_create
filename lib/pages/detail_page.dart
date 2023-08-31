@@ -4,36 +4,30 @@ import 'package:todo_sql_and_cubit_create/main.dart';
 import 'package:todo_sql_and_cubit_create/models/todo_model.dart';
 import '../cubit/detail_cubit/detail_cubit.dart';
 
-class DetailPage extends StatefulWidget {
- final Todo? todo;
-  DetailPage({Key? key,this.todo}) : super(key: key);
+class DetailPage extends StatelessWidget {
+  final Todo? todo;
 
-  @override
-  State<DetailPage> createState() => _DetailPageState();
-}
-
-class _DetailPageState extends State<DetailPage> {
+  DetailPage({Key? key, this.todo}) : super(key: key);
   final titleCtrl = TextEditingController();
   final descCtrl = TextEditingController();
-   bool result = false;
-  @override
-  void initState() {
-    super.initState();
-    if (widget.todo?.title != null || widget.todo?.description != null) {
-      titleCtrl.text = widget.todo!.title;
-      descCtrl.text = widget.todo!.description;
-      result = true;
-    }
+
+  void initStat() {
+    titleCtrl.text = todo?.title ?? "";
+    descCtrl.text = todo?.description ?? "";
   }
 
   @override
   Widget build(BuildContext context) {
+    initStat();
+
     detailCubit.stream.listen((state) {
       if (detailCubit.state is DetailFailure) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text((detailCubit.state as DetailFailure).message)));
       }
-      if (detailCubit.state is DetailCreateSuccess && context.mounted) {
+      if ((detailCubit.state is DetailCreateSuccess ||
+              detailCubit.state is DetailUpdateSuccess) &&
+          context.mounted) {
         Navigator.of(context).pop();
       }
     });
@@ -46,17 +40,11 @@ class _DetailPageState extends State<DetailPage> {
         actions: [
           IconButton(
             onPressed: () {
-              if(result){
-                detailCubit.delate(widget.todo!.id);
-                detailCubit.edit(
-                    Todo(
-                    id: widget.todo!.id,
-                    title: titleCtrl.text,
-                    description: descCtrl.text,
-                    isCompleted: false),
-                );
-              }
+              if (todo == null) {
                 detailCubit.create(titleCtrl.text, descCtrl.text);
+              } else {
+                detailCubit.edit(todo!, titleCtrl.text, descCtrl.text);
+              }
             },
             icon: Icon(Icons.save),
           ),
